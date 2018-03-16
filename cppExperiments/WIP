@@ -1,0 +1,62 @@
+#include <iostream>
+#include <vector>
+#include <algorithm>
+
+using namespace std;
+
+class Num {
+    public:
+    Num(int num, int positions) {
+        for (int i = 0; i < positions; i++) {
+            number.push_back(num%10);
+            num/=10;
+        }
+        //reverse(number.begin(), number.end());
+    }
+    Num(int num[], int positions) {
+        for (int i = 0; i < positions; i++) {
+            number.push_back(num[i]);
+        }
+        //reverse(number.begin(), number.end());
+    }
+    Num(vector<short> n): number(n){};
+    Num operator+(Num b) {
+
+        unsigned int maxPos = max(length(), b.length());
+        vector<short> temp;
+        int carry = 0;
+
+        for (unsigned int i = 0; i < maxPos; i++) {
+            int t = number[i] + b.get(i) + carry;
+            cout << number[i] << " + " << b.get(i) << " + " << carry << endl;
+            if (t >= 10) {
+                carry = 1;
+                temp.push_back(t%10);
+            } else {
+                carry = 0;
+                temp.push_back(t);
+            }
+        }
+        if (carry == 1) temp.push_back(1);
+        return Num(temp);
+    }
+    int get(int pos){ return number[pos]; }
+    void print(){
+        for(unsigned int i = 0; i < number.size(); i++) cout << number[i];
+        cout << endl;
+        }
+    unsigned int length(){ return number.size(); }
+    private:
+    vector<short> number;
+};
+
+int main()
+{
+    Num test2(27, 2);
+    Num test1(74, 2);
+    test1.print();
+    test2.print();
+    Num test3 = test1+test2;
+    test3.print();
+    return 0;
+}

@@ -1,0 +1,48 @@
+#include <iostream>
+#include <vector>
+#include <algorithm>
+#include <string>
+
+using namespace std;
+
+
+
+
+template<typename T>
+auto add(T first, T second) {
+    return first + second;
+}
+
+
+
+template<class InputIt, class T>
+T add(InputIt first, InputIt last, T init)
+{
+    for (; first != last; ++first) {
+        init = init + *first;
+    }
+    return init;
+}
+int main()
+{
+
+
+    vector<string> svec = { "pri", "vet" , " ", "mir", "!" };
+    vector<int> ivec = { 5, 7, 2, 9, 12 };
+    vector<float> fvec = { 0.4f, 16.0f, 132.0f, 2.65f };
+    vector<char> cvec = { 'a', 'b', 'c' };
+    int sum1 = 0;
+    cout << add(ivec.begin(), ivec.end(), sum1) << endl;
+    float sum2 = 0;
+    cout << add(fvec.begin(), fvec.end(), sum2) << endl;
+    string sum3 = "";
+    cout << add(svec.begin(), svec.end(), sum3) << endl;
+    string sum4 = "";
+    cout << add(cvec.begin(), cvec.end(), sum4) << endl;
+    string resultString = "";
+    cout << accumulate(ivec.begin(), ivec.end(), 0, plus<int>()) << endl;
+    cout << accumulate(fvec.begin(), fvec.end(), 0.0f, plus<float>()) << endl;
+    cout << accumulate(svec.begin(), svec.end(), resultString, plus<string>()) << endl;
+    cout << accumulate(cvec.begin(), cvec.end(), 0, plus<char>()) << endl;
+    return 0;
+}

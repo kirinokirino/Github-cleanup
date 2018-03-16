@@ -1,0 +1,10 @@
+#!/bin/sh
+
+pacman -Qe | cut -d ' ' -f 1 | uniq | sort > ./_Temp1
+if [ $1 ]; then
+cat "$1" > ./_Temp2
+fi
+pacman -Qg base base-devel | cut -d ' ' -f 2 >> ./_Temp2
+cat ./_Temp2 | uniq | sort >> ./_Temp2
+diff ./_Temp1 ./_Temp2 | grep "<" | cut -d ' ' -f 2
+rm ./_Temp1 ./_Temp2
