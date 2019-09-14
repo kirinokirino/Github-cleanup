@@ -1,2 +1,1 @@
-# SmallProjects
-Non-web stuff I do when learning something
+# Don't waste your time, have a good day.
